@@ -1,0 +1,23 @@
+service: lambda-aws-2
+# Creando un paquete optimizado para nuestras funciones
+package:
+  individually: true
+frameworkVersion: '2'
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: prod
+  region: us-east-1
+plugins:
+  - serverless-bundle
+  - serverless-offline
+  - serverless-dotenv-plugin # Cargar el archivo .env como variables de ambiente
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+           path: /hello
+           method: GET
+        
